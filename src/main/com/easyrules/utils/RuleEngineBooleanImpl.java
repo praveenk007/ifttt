@@ -49,7 +49,6 @@ public class RuleEngineBooleanImpl<T> {
                 fieldMap.put((field.getAnnotation(Fact.class)).value(), field);
             }
         } );
-        System.out.println(fieldMap);
     }
 
     public boolean execute() throws Exception {
@@ -62,20 +61,16 @@ public class RuleEngineBooleanImpl<T> {
         boolean any = false;
         boolean all = true;
         if(anyRule != null && anyRule instanceof List) {
-            System.out.println("any rule identified");
             for(Object object : (List) anyRule) {
-                System.out.println("rule :::::: "+object);
                 any = any || recursivelyApply(object, BooleanJoinEnum.ANY);
             } return any;
         } else if(allRule != null) {
-            System.out.println("all rule identified");
             for(Object object : (List) allRule) {
                 all = all && recursivelyApply(object, BooleanJoinEnum.ALL);
             } return all;
         } return false;
     }
     private boolean recursivelyApply(Object rule, BooleanJoinEnum join) throws Exception {
-            System.out.println("rule is inst :: "+rule.getClass());
         if(rule instanceof Rule) {
             return join    ==  BooleanJoinEnum.ANY ? any((Rule) rule, object) : all((Rule) rule, object);
         } else if(rule instanceof Map) {
@@ -84,7 +79,6 @@ public class RuleEngineBooleanImpl<T> {
     }
 
     private boolean any(Rule rule, Object object) throws Exception {
-        System.out.println("rule :: "+rule);
         Field field = fieldMap.get(rule.getFact());
         if(field == null) {
             throw new Exception("Fact "+rule.getFact()+" missing in object! Add the annotation in object or remove it from rule.");
@@ -92,7 +86,6 @@ public class RuleEngineBooleanImpl<T> {
     }
 
     private boolean all(Rule rule, Object object) throws Exception {
-        System.out.println("rule :: "+rule);
         Field field = fieldMap.get(rule.getFact());
         if(field == null) {
             throw new Exception("Fact "+rule.getFact()+" missing in object! Add the annotation in object or remove it from rule.");
