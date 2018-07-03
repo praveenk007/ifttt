@@ -5,6 +5,8 @@ package main.com.easyrules.enums;
  **/
 public enum OperatorEnum {
 
+    EQUALS("=="),
+
     GREATER_THAN(">"),
 
     LESSER_THAN("<"),

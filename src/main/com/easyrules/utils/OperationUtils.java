@@ -22,10 +22,27 @@ public class OperationUtils {
             case "<": {
                 return getLT();
             }
+            case "==": {
+                return getEQ();
+            }
             default: {
                 return null;
             }
         }
+    }
+
+    public static Operator getEQ() {
+        return new Operator("==", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
+
+            @Override
+            public double apply(double[] values) {
+                if (values[0] == values[1]) {
+                    return 1d;
+                } else {
+                    return 0d;
+                }
+            }
+        };
     }
 
     public static Operator getLT() {

@@ -9,7 +9,7 @@ public class Rule {
 
     private String          fact;
 
-    private OperatorEnum operation;
+    private OperatorEnum    operation;
 
     private Object          value;
 
