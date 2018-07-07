@@ -56,8 +56,8 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     }
 
     @Override
-    public boolean execute() throws Exception {
-        return exec(rule);
+    public Boolean execute() throws Exception {
+        return new Boolean(exec(rule));
     }
 
     private boolean exec(JsonNode rule) throws Exception {

@@ -11,5 +11,5 @@ public abstract class RuleEngine {
 
     public abstract RuleEngine against(Object object);
 
-    public abstract boolean execute() throws Exception;
+    public abstract Boolean execute() throws Exception;
 }
