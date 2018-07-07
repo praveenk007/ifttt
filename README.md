@@ -42,8 +42,10 @@ Rules can be provided in below ``` JsonNode ``` format
         ]
     }
 ```
+Rules defined under ``` any``` block are OR'd with one another and those defined under ``` all``` block are AND with one another.
+Result of these rules can be again OR'd or AND (as you can see a parent ``` any``` block in above rule example).
 
-The above rules are run against facts defined in below ``` JAVA``` format
+Above rules are run against facts defined in below ``` JAVA``` format
 
 ```java
 public class RuleModel {
@@ -75,9 +77,6 @@ RuleEngine engine       =  new RuleEngineBooleanImpl();
 //pass the rules and facts to engine
 Object object           =  engine.runThis(rules).against(facts).execute();
 ```
-
-Rules defined under ``` any``` block are OR'd with one another and those defined under ``` all``` block are AND with one another.
-The resultant of these rules can be again OR'd or AND (as you can see a parent ``` any``` block in above rule example).
 
 This rule engine also supports nested (multiple levels of) ```any```/```all``` blocks.
 
