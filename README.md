@@ -1,9 +1,11 @@
 # ifttt - if this then that
-is a simple-to-use rule engine
+is a simple-to-use rule engine which can be used to keep the conditional business logics out of the code.
+
 
 ## Usage
 
 The base version (V1.0.0.0) provides the functionality where-in if an operation (``` >= ```, ``` > ```, ``` <=```, ``` < ```, ```== ```) evaluates to ``` true```, then ``` true ``` is returned.
+
 Rules can be provided in below ``` JsonNode ``` format
 
 ```json
@@ -62,10 +64,15 @@ public class RuleModel {
 }
 ```
 
+### Code snippet for usage
+
+```java
+RuleEngine engine = new RuleEngineBooleanImpl();
+engine.runThis(ddd()).against(model).execute()
+```
+
 Rules defined under ``` any``` block are OR'd with one another and those defined under ``` all``` block are AND with one another.
 The resultant of these rules can be again OR'd or AND (as you can see a parent ``` any``` block in above rule example).
 
 This rule engine also supports nested (multiple levels of) ```any```/```all``` blocks.
-
-Fact names in rules and that in the Fact model should match, else it will be ignored.
 
