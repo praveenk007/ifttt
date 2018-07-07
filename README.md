@@ -80,3 +80,6 @@ Object object           =  engine.runThis(rules).against(facts).execute();
 
 This rule engine also supports nested (multiple levels of) ```any```/```all``` blocks.
 
+### Upcoming features in pipeline
+Rule document will have a ``` then``` to execute ``` Math``` operations defined in it. ``` then``` field can be defined something like this ``` then : "($days+1)" ```, where ``` days``` is the fact provided in fact object. The result will be returned to the caller if the condition evaluates to true.
+
