@@ -1,5 +1,5 @@
 # ifttt - if this then that
-is a simple-to-use rule engine which can be used to keep the conditional business logics out of the code.
+is a simple-to-use rule engine which can be used to keep the conditional business logics outside the codebase.
 
 
 ## Usage
