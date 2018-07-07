@@ -4,7 +4,7 @@ is a simple-to-use rule engine
 ## Usage
 
 The base version (V1.0.0.0) provides the functionality where-in if an operation (``` >= ```, ``` > ```, ``` <=```, ``` < ```, ```== ```) evaluates to ``` true```, then ``` true ``` is returned.
-Rules can be provided in below ``` JSON ``` format
+Rules can be provided in below ``` JsonNode ``` format
 
 ```json
 {
