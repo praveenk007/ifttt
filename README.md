@@ -67,8 +67,13 @@ public class RuleModel {
 ### Code snippet for usage
 
 ```java
-RuleEngine engine = new RuleEngineBooleanImpl();
-engine.runThis(ddd()).against(model).execute()
+// get rules
+JsonNode rules          =  ...
+// get facts
+Object facts            =  ...
+RuleEngine engine       =  new RuleEngineBooleanImpl();
+//pass the rules and facts to engine
+Object object           =  engine.runThis(rules).against(facts).execute();
 ```
 
 Rules defined under ``` any``` block are OR'd with one another and those defined under ``` all``` block are AND with one another.
