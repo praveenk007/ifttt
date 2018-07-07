@@ -1,6 +1,6 @@
-package main.com.easyrules.models;
+package main.com.ifttt.models;
 
-import main.com.easyrules.enums.OperatorEnum;
+import main.com.ifttt.enums.OperatorEnum;
 
 /**
  * @author praveenkamath

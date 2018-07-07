@@ -1,6 +1,6 @@
-package main.com.easyrules.utils;
+package main.com.ifttt.utils;
 
-import main.com.easyrules.enums.OperatorEnum;
+import main.com.ifttt.enums.OperatorEnum;
 import net.objecthunter.exp4j.operator.Operator;
 
 /**

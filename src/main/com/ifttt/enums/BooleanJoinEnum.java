@@ -1,4 +1,4 @@
-package main.com.easyrules.enums;
+package main.com.ifttt.enums;
 
 /**
  * @author praveenkamath

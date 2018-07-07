@@ -1,8 +1,8 @@
-package main.com.easyrules.utils;
+package main.com.ifttt.utils;
 
-import main.com.easyrules.annotations.Fact;
-import main.com.easyrules.enums.BooleanJoinEnum;
-import main.com.easyrules.models.Rule;
+import main.com.ifttt.annotations.Fact;
+import main.com.ifttt.enums.BooleanJoinEnum;
+import main.com.ifttt.models.Rule;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import java.lang.annotation.Annotation;

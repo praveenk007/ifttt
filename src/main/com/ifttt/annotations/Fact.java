@@ -1,4 +1,4 @@
-package main.com.easyrules.annotations;
+package main.com.ifttt.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
