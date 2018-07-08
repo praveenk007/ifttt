@@ -1,11 +1,11 @@
-package main.com.ifttt.abstracts.impl;
+package main.java.com.ifttt.abstracts.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import main.com.ifttt.abstracts.RuleEngine;
-import main.com.ifttt.annotations.Fact;
-import main.com.ifttt.enums.BooleanJoinEnum;
-import main.com.ifttt.enums.OperatorEnum;
-import main.com.ifttt.utils.OperationUtils;
+import main.java.com.ifttt.abstracts.RuleEngine;
+import main.java.com.ifttt.annotations.Fact;
+import main.java.com.ifttt.enums.BooleanJoinEnum;
+import main.java.com.ifttt.enums.OperatorEnum;
+import main.java.com.ifttt.utils.OperationUtils;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import java.lang.annotation.Annotation;

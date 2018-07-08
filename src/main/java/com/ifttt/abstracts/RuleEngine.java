@@ -1,4 +1,4 @@
-package main.com.ifttt.abstracts;
+package main.java.com.ifttt.abstracts;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
