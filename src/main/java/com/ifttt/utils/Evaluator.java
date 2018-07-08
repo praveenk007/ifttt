@@ -1,7 +1,7 @@
-package main.java.com.ifttt.utils;
+package com.ifttt.utils;
 
-import main.java.com.ifttt.enums.OperationTypeEnum;
-import main.java.com.ifttt.enums.OperatorEnum;
+import com.ifttt.enums.OperationTypeEnum;
+import com.ifttt.enums.OperatorEnum;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 

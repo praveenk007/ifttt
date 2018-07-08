@@ -1,6 +1,6 @@
-package main.java.com.ifttt.utils;
+package com.ifttt.utils;
 
-import main.java.com.ifttt.enums.OperatorEnum;
+import com.ifttt.enums.OperatorEnum;
 
 /**
  * @author praveenkamath

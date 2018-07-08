@@ -1,4 +1,4 @@
-package main.java.com.ifttt.enums;
+package com.ifttt.enums;
 
 /**
  * @author praveenkamath
