@@ -1,6 +1,6 @@
-package main.com.ifttt.utils;
+package main.java.com.ifttt.utils;
 
-import main.com.ifttt.enums.OperatorEnum;
+import main.java.com.ifttt.enums.OperatorEnum;
 import net.objecthunter.exp4j.operator.Operator;
 
 /**
