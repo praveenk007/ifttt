@@ -23,7 +23,7 @@ public class RuleEngineBooleanImpl extends RuleEngine {
 
     private Object object;
 
-    private Map<String, Field> fieldMap;
+    private Map<String, Object> fieldMap;
 
     @Override
     public RuleEngine runThis(JsonNode rule) throws Exception {
@@ -39,20 +39,24 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     }
 
     @Override
-    public RuleEngineBooleanImpl against(Object object) {
+    public RuleEngineBooleanImpl against(Object object) throws Exception{
         this.object     =   object;
-        constructAnnotationFieldMap();
+        if(object instanceof Map) {
+            this.fieldMap = (Map<String, Object>) object;
+        } else {
+            constructAnnotationFieldMap();
+        }
         return this;
     }
 
-    private void constructAnnotationFieldMap() {
+    private void constructAnnotationFieldMap() throws Exception {
         fieldMap    =   new HashMap<>();
-        Arrays.stream(object.getClass().getFields()).forEach(field -> {
+        for(Field field: object.getClass().getFields()) {
             Annotation annotation   =  field.getAnnotation(Fact.class);
             if(annotation != null) {
-                fieldMap.put((field.getAnnotation(Fact.class)).value(), field);
+                fieldMap.put((field.getAnnotation(Fact.class)).value(), field.get(object));
             }
-        } );
+        }
     }
 
     @Override
@@ -82,18 +86,13 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     }
 
     private boolean any(JsonNode rule, Object object) throws Exception {
-        Field field = fieldMap.get(rule.get("fact").asText());
-        if(field == null) {
-            throw new Exception("Fact "+rule.get("fact")+" missing in object! Add the annotation in object or remove it from rule.");
-        } return eval(rule, field.get(object), rule.get("value"));
+        Object factVal  = fieldMap.get(rule.get("fact").asText());
+        return eval(rule, factVal, rule.get("value"));
     }
 
     private boolean all(JsonNode rule, Object object) throws Exception {
-        Field field = fieldMap.get(rule.get("fact").asText());
-        if(field == null) {
-            throw new Exception("Fact "+rule.get("fact")+" missing in object! Add the annotation in object or remove it from rule.");
-        }
-        return eval(rule, field.get(object), rule.get("value"));
+        Object factVal = fieldMap.get(rule.get("fact").asText());
+        return eval(rule, factVal, rule.get("value"));
     }
 
     private boolean eval(JsonNode rule, Object actual, Object expected) {
