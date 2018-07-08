@@ -1,6 +1,7 @@
-package main.java.com.ifttt.models;
+package com.ifttt.models;
 
-import main.java.com.ifttt.enums.OperatorEnum;
+
+import com.ifttt.enums.OperatorEnum;
 
 /**
  * @author praveenkamath
@@ -9,7 +10,7 @@ public class Rule {
 
     private String          fact;
 
-    private OperatorEnum    operation;
+    private OperatorEnum operation;
 
     private Object          value;
 
