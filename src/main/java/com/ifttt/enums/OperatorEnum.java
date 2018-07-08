@@ -5,20 +5,27 @@ package main.java.com.ifttt.enums;
  **/
 public enum OperatorEnum {
 
-    EQUALS("=="),
+    EQUALS("==", OperationTypeEnum.MATH),
 
-    GREATER_THAN(">"),
+    GREATER_THAN(">", OperationTypeEnum.MATH),
 
-    LESSER_THAN("<"),
+    LESSER_THAN("<", OperationTypeEnum.MATH),
 
-    GREATER_THAN_INCLUSIVE(">="),
+    GREATER_THAN_INCLUSIVE(">=", OperationTypeEnum.MATH),
 
-    LESSER_THAN_INCLUSIVE("<=");
+    STRING_EQUALS_IGNORE("equalsIgnoreCase", OperationTypeEnum.STRING),
+
+    STRING_EQUALS("equals", OperationTypeEnum.STRING),
+
+    LESSER_THAN_INCLUSIVE("<=", OperationTypeEnum.MATH);
 
     private String exp;
 
-    OperatorEnum(String exp) {
+    private OperationTypeEnum type;
+
+    OperatorEnum(String exp, OperationTypeEnum type) {
         this.exp    =   exp;
+        this.type   =   type;
     }
 
     public String getExp() {
@@ -27,5 +34,13 @@ public enum OperatorEnum {
 
     public void setExp(String exp) {
         this.exp = exp;
+    }
+
+    public OperationTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(OperationTypeEnum type) {
+        this.type = type;
     }
 }

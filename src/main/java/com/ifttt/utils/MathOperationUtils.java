@@ -4,9 +4,11 @@ import main.java.com.ifttt.enums.OperatorEnum;
 import net.objecthunter.exp4j.operator.Operator;
 
 /**
+ *
+ *
  * @author praveenkamath
  **/
-public class OperationUtils {
+public class MathOperationUtils {
 
     public static Operator getOperation(OperatorEnum operation) {
         switch (operation.getExp()) {
@@ -31,7 +33,7 @@ public class OperationUtils {
         }
     }
 
-    public static Operator getEQ() {
+    private static Operator getEQ() {
         return new Operator("==", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 
             @Override
@@ -45,7 +47,7 @@ public class OperationUtils {
         };
     }
 
-    public static Operator getLT() {
+    private static Operator getLT() {
         return new Operator("<", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 
             @Override
@@ -59,7 +61,7 @@ public class OperationUtils {
         };
     }
 
-    public static Operator getLTE() {
+    private static Operator getLTE() {
         return new Operator("<=", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 
             @Override
@@ -73,7 +75,7 @@ public class OperationUtils {
         };
     }
 
-    public static Operator getGT() {
+    private static Operator getGT() {
         return new Operator(">", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 
             @Override
@@ -87,7 +89,7 @@ public class OperationUtils {
         };
     }
 
-    public static Operator getGTE() {
+    private static Operator getGTE() {
         return new Operator(">=", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 
             @Override
