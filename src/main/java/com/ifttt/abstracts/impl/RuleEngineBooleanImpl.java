@@ -43,8 +43,7 @@ public class RuleEngineBooleanImpl extends RuleEngine {
             this.factMap = (Map<String, Object>) object;
         } else {
             constructAnnotationFieldMap();
-        }
-        return this;
+        } return this;
     }
 
     private void constructAnnotationFieldMap() throws Exception {
