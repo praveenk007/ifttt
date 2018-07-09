@@ -17,7 +17,15 @@ public enum OperatorEnum {
 
     STRING_EQUALS("equals", OperationTypeEnum.STRING),
 
-    LESSER_THAN_INCLUSIVE("<=", OperationTypeEnum.MATH);
+    STRING_NOT_EQUALS("notEquals", OperationTypeEnum.STRING),
+
+    BOOLEAN_EQUALS("booleanEquals", OperationTypeEnum.BOOLEAN),
+
+    LESSER_THAN_INCLUSIVE("<=", OperationTypeEnum.MATH),
+
+    LIST_CONTAINS("listContains", OperationTypeEnum.LIST_CONTAINS),
+
+    LIST_NOT_CONTAINS("listNotContains", OperationTypeEnum.LIST_NOT_CONTAINS);
 
     private String exp;
 

@@ -85,12 +85,12 @@ public class RuleEngineBooleanImpl extends RuleEngine {
 
     private boolean any(JsonNode rule) throws Exception {
         Object factVal  = factMap.get(rule.get("fact").asText());
-        return factVal != null && (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value").asText());
+        return factVal != null && (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
     }
 
     private boolean all(JsonNode rule) throws Exception {
         Object factVal = factMap.get(rule.get("fact").asText());
-        return factVal == null || (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value").asText());
+        return factVal == null || (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
     }
 
     private Object eval(OperatorEnum operator, Object actual, Object expected) throws Exception {

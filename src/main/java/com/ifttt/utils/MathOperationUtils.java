@@ -10,7 +10,7 @@ import net.objecthunter.exp4j.operator.Operator;
  **/
 public class MathOperationUtils {
 
-    public static Operator getOperation(OperatorEnum operation) {
+    public static Operator getOperation(OperatorEnum operation) throws Exception {
         switch (operation.getExp()) {
             case ">=": {
                 return getGTE();
@@ -28,7 +28,7 @@ public class MathOperationUtils {
                 return getEQ();
             }
             default: {
-                return null;
+                throw new Exception("Unsupported operation!");
             }
         }
     }

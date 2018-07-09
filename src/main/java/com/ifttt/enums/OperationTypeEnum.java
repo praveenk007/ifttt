@@ -5,5 +5,8 @@ package com.ifttt.enums;
  **/
 public enum OperationTypeEnum {
     MATH,
-    STRING;
+    LIST_CONTAINS,
+    LIST_NOT_CONTAINS,
+    STRING,
+    BOOLEAN;
 }
