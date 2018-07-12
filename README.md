@@ -4,8 +4,6 @@ is a simple-to-use rule engine which can be used to keep the conditional busines
 
 ## Usage
 
-The base version (V1.0.0.0) provides the functionality where-in if an operation (``` >= ```, ``` > ```, ``` <=```, ``` < ```, ```== ```) evaluates to ``` true```, then ``` true ``` is returned.
-
 Rules can be provided in below ``` JsonNode ``` format
 
 ```json
