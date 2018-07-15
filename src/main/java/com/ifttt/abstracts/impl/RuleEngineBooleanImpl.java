@@ -9,7 +9,6 @@ import com.ifttt.enums.OperatorEnum;
 import com.ifttt.utils.Evaluator;
 import main.java.com.ifttt.annotations.Fact;
 import main.java.com.ifttt.enums.BooleanJoinEnum;
-import org.apache.log4j.Logger;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -19,8 +18,6 @@ import java.util.Map;
  * @author praveenkamath
  **/
 public class RuleEngineBooleanImpl extends RuleEngine {
-
-    private static final Logger LOG = Logger.getLogger(RuleEngineBooleanImpl.class);
 
     private ArrayNode rulesOp;
 
