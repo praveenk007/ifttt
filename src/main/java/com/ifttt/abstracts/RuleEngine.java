@@ -1,4 +1,4 @@
-package main.java.com.ifttt.abstracts;
+package com.ifttt.abstracts;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -11,5 +11,5 @@ public abstract class RuleEngine {
 
     public abstract RuleEngine against(Object object) throws Exception;
 
-    public abstract Boolean execute() throws Exception;
+    public abstract JsonNode execute() throws Exception;
 }

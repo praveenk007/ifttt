@@ -1,12 +1,15 @@
 package com.ifttt.abstracts.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.ifttt.abstracts.RuleEngine;
 import com.ifttt.enums.OperatorEnum;
 import com.ifttt.utils.Evaluator;
-import main.java.com.ifttt.abstracts.RuleEngine;
 import main.java.com.ifttt.annotations.Fact;
 import main.java.com.ifttt.enums.BooleanJoinEnum;
-
+import org.apache.log4j.Logger;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -16,6 +19,12 @@ import java.util.Map;
  * @author praveenkamath
  **/
 public class RuleEngineBooleanImpl extends RuleEngine {
+
+    private static final Logger LOG = Logger.getLogger(RuleEngineBooleanImpl.class);
+
+    private ArrayNode rulesOp;
+
+    private JsonNode opNode;
 
     private JsonNode rule;
 
@@ -57,8 +66,13 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     }
 
     @Override
-    public Boolean execute() throws Exception {
-        return exec(rule);
+    public JsonNode execute() throws Exception {
+        this.rulesOp = new ObjectMapper().createArrayNode();
+        this.opNode = new ObjectMapper().createObjectNode();
+        boolean op = exec(rule);
+        ((ObjectNode) opNode).put("op", op);
+        ((ObjectNode) opNode).put("logs", rulesOp);
+        return opNode;
     }
 
     private boolean exec(JsonNode rule) throws Exception {
@@ -84,13 +98,29 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     }
 
     private boolean any(JsonNode rule) throws Exception {
+        JsonNode log = new ObjectMapper().createObjectNode();
+        ((ObjectNode) log).put("id", rule.get("id").asText());
         Object factVal  = factMap.get(rule.get("fact").asText());
-        return factVal != null && (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
+        if(factVal == null) {
+            return false;
+        }
+        boolean op = (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
+        ((ObjectNode) log).put("op", op);
+        rulesOp.add(log);
+        return op;
     }
 
     private boolean all(JsonNode rule) throws Exception {
+        JsonNode log = new ObjectMapper().createObjectNode();
+        ((ObjectNode) log).put("id", rule.get("id").asText());
         Object factVal = factMap.get(rule.get("fact").asText());
-        return factVal == null || (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
+        if(factVal == null) {
+            return true;
+        }
+        boolean op = (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
+        ((ObjectNode) log).put("op", op);
+        rulesOp.add(log);
+        return op;
     }
 
     private Object eval(OperatorEnum operator, Object actual, Object expected) throws Exception {
