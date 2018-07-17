@@ -43,7 +43,7 @@ Rules can be provided in below ``` JsonNode ``` format
 Rules defined under ``` any``` block are OR'd with one another and those defined under ``` all``` block are AND with one another.
 Result of these rules can be again OR'd or AND (as you can see a parent ``` any``` block in above rule example).
 
-Above rules are run against facts defined in below ``` JAVA``` format
+Above rules are run against facts defined either in below format
 
 ```java
 public class RuleModel {
@@ -62,6 +62,14 @@ public class RuleModel {
 
     //... getters/setters
 }
+```
+
+or
+
+```java
+Map<String, Object> facts = new HashMap<String, Object>();
+facts.put("beer_consumption", 10);
+facts.put("cigar_consumption", 10);
 ```
 
 ### Code snippet for usage
