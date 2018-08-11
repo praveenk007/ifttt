@@ -9,6 +9,7 @@ import com.ifttt.annotations.Fact;
 import com.ifttt.enums.BooleanJoinEnum;
 import com.ifttt.enums.OperatorEnum;
 import com.ifttt.utils.Evaluator;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import java.util.Map;
 /**
  * @author praveenkamath
  **/
-public class RuleEngineBooleanImpl extends RuleEngine {
+public class RuleEngineJsonImpl extends RuleEngine {
 
     private ArrayNode rulesOp;
 
@@ -43,7 +44,7 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     }
 
     @Override
-    public RuleEngineBooleanImpl against(Object object) throws Exception {
+    public RuleEngineJsonImpl against(Object object) throws Exception {
         this.object     =   object;
         if(object instanceof Map) {
             this.factMap = (Map<String, Object>) object;
@@ -66,15 +67,19 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     public JsonNode execute() throws Exception {
         this.rulesOp = new ObjectMapper().createArrayNode();
         this.opNode = new ObjectMapper().createObjectNode();
-        boolean op = exec(rule);
-        ((ObjectNode) opNode).put("op", op);
+        boolean result = exec(rule);
+        if(result) {
+            ((ObjectNode) opNode).put("op", rule.get("then"));
+        } else {
+            ((ObjectNode) opNode).put("op", rule.get("else"));
+        }
         ((ObjectNode) opNode).put("logs", rulesOp);
         return opNode;
     }
 
     private boolean exec(JsonNode rule) throws Exception {
-        JsonNode anyRule =   rule.get("any");
-        JsonNode allRule =   rule.get("all");
+        JsonNode anyRule =   rule.get("ifany");
+        JsonNode allRule =   rule.get("ifall");
         boolean any = false;
         boolean all = true;
         if(anyRule != null) {
@@ -89,7 +94,7 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     }
 
     private boolean recursivelyApply(JsonNode rule, BooleanJoinEnum join) throws Exception {
-        if(rule.get("any") == null && rule.get("all") == null) {
+        if(rule.get("ifany") == null && rule.get("ifall") == null) {
             return join    ==  BooleanJoinEnum.ANY ? any(rule) : all(rule);
         } return exec (rule);
     }
