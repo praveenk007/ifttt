@@ -70,7 +70,7 @@ public class RuleEngineJsonImpl extends RuleEngine {
         boolean result = exec(rule);
         if(result) {
             ((ObjectNode) opNode).put("op", rule.get("then"));
-        } else {
+        } else if(rule.get("else") != null) {
             ((ObjectNode) opNode).put("op", rule.get("else"));
         }
         ((ObjectNode) opNode).put("logs", rulesOp);

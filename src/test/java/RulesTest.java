@@ -38,7 +38,7 @@ public class RulesTest {
         facts.put("childCount", 3);
         JsonNode result = execute(ruleNode, facts);
         System.out.println("Op :: "  + result);
-        assertEquals(null, result.get("op").get("return"));
+        assertEquals(null, result.get("op"));
     }
 
     private JsonNode execute(JsonNode ruleNode, Map<String, Object> facts) throws Exception {
