@@ -5,15 +5,19 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.ifttt.enums.OperationTypeEnum;
 import com.ifttt.enums.OperatorEnum;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+
+import java.util.Arrays;
 
 /**
  * @author praveenkamath
  **/
 public class Evaluator {
 
-    public static Object eval(OperatorEnum operator, Object actual, Object expected) throws Exception {
+    public static Object eval(OperatorEnum operator, Object actual, JsonNode rule) throws Exception {
+        Object expected = rule.get("value");
         if(operator.getType() == OperationTypeEnum.STRING) {
             return StringOperationUtils.eval(operator, actual, expected);
         }
@@ -39,6 +43,10 @@ public class Evaluator {
                     .operator(MathOperationUtils.getOperation(operator))
                     .build();
             return exp.evaluate() == 1;
-        } throw new Exception("Unsupported operator!");
+        }
+        if(operator.getType() == OperationTypeEnum.EXPRESSION) {
+            return JaninoExpressUtils.brew(rule.get("id").asText(), rule.get("exp").asText(), rule.get("params").asText().split(","), (Object[]) actual);
+        }
+        throw new Exception("Unsupported operator!");
     }
 }

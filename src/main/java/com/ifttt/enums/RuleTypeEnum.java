@@ -3,8 +3,7 @@ package com.ifttt.enums;
 /**
  * @author praveenkamath
  **/
-public enum BooleanJoinEnum {
+public enum RuleTypeEnum {
 
-    ANY,
-    ALL;
+    EXPRESSION
 }

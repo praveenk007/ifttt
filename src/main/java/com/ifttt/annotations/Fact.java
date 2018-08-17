@@ -1,4 +1,4 @@
-package main.java.com.ifttt.annotations;
+package com.ifttt.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
