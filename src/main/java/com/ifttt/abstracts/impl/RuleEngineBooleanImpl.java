@@ -3,10 +3,9 @@ package com.ifttt.abstracts.impl;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.ifttt.enums.OperatorEnum;
 import com.ifttt.utils.Evaluator;
-import main.java.com.ifttt.abstracts.RuleEngine;
-import main.java.com.ifttt.annotations.Fact;
-import main.java.com.ifttt.enums.BooleanJoinEnum;
-
+import com.ifttt.abstracts.RuleEngine;
+import com.ifttt.annotations.Fact;
+import com.ifttt.enums.BooleanJoinEnum;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -85,15 +84,15 @@ public class RuleEngineBooleanImpl extends RuleEngine {
 
     private boolean any(JsonNode rule) throws Exception {
         Object factVal  = factMap.get(rule.get("fact").asText());
-        return factVal != null && (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
+        return factVal != null && (boolean) eval(rule);
     }
 
     private boolean all(JsonNode rule) throws Exception {
         Object factVal = factMap.get(rule.get("fact").asText());
-        return factVal == null || (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
+        return factVal == null || (boolean) eval(rule);
     }
 
-    private Object eval(OperatorEnum operator, Object actual, Object expected) throws Exception {
-        return Evaluator.eval(operator, actual, expected);
+    private Object eval(JsonNode rule) throws Exception {
+        return Evaluator.eval(OperatorEnum.valueOf(rule.get("operator").asText()), factMap.get(rule.get("fact").asText()), rule);
     }
 }
