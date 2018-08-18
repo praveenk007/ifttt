@@ -7,7 +7,7 @@
     <groupId>com.turtle</groupId>
     <packaging>jar</packaging>
     <artifactId>ifttt</artifactId>
-    <version>1.0.0.3</version>
+    <version>1.0.0.4</version>
     <name>ifttt</name>
     <url>http://maven.apache.org</url>
 
@@ -55,6 +55,11 @@
             <artifactId>mockito-core</artifactId>
             <version>2.21.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.0.8</version>
+        </dependency>
     </dependencies>
 
 
@@ -65,8 +70,6 @@
         <url>http://127.0.0.1/dummy</url>
     </scm>
 
-    <!--
-    -->
     <build>
         <plugins>
             <plugin>

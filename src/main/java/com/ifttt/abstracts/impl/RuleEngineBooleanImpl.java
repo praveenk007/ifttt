@@ -101,7 +101,7 @@ public class RuleEngineBooleanImpl extends RuleEngine {
         if(factVal == null) {
             return false;
         }
-        boolean op = (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
+        boolean op = (boolean) eval(rule);
         ((ObjectNode) log).put("op", op);
         rulesOp.add(log);
         return op;
@@ -114,13 +114,13 @@ public class RuleEngineBooleanImpl extends RuleEngine {
         if(factVal == null) {
             return true;
         }
-        boolean op = (boolean) eval(OperatorEnum.valueOf(rule.get("operator").asText()), factVal, rule.get("value"));
+        boolean op = (boolean) eval(rule);
         ((ObjectNode) log).put("op", op);
         rulesOp.add(log);
         return op;
     }
 
-    private Object eval(OperatorEnum operator, Object actual, Object expected) throws Exception {
-        return Evaluator.eval(operator, actual, expected);
+    private Object eval(JsonNode rule) throws Exception {
+        return Evaluator.eval(OperatorEnum.valueOf(rule.get("operator").asText()), factMap.get(rule.get("fact").asText()), rule);
     }
 }

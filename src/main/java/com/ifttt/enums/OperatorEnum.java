@@ -5,6 +5,8 @@ package com.ifttt.enums;
  **/
 public enum OperatorEnum {
 
+    EXPRESSION("expression", OperationTypeEnum.EXPRESSION),
+
     EQUALS("==", OperationTypeEnum.MATH),
 
     GREATER_THAN(">", OperationTypeEnum.MATH),
