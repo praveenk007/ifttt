@@ -21,7 +21,7 @@ public class RuleEngineBooleanImpl extends RuleEngine {
 
     private ArrayNode rulesOp;
 
-    private JsonNode opNode;
+
 
     private JsonNode rule;
 
@@ -65,7 +65,7 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     @Override
     public JsonNode execute() throws Exception {
         this.rulesOp = new ObjectMapper().createArrayNode();
-        this.opNode = new ObjectMapper().createObjectNode();
+        JsonNode opNode = new ObjectMapper().createObjectNode();
         boolean op = exec(rule);
         ((ObjectNode) opNode).put("op", op);
         ((ObjectNode) opNode).put("logs", rulesOp);
@@ -95,29 +95,32 @@ public class RuleEngineBooleanImpl extends RuleEngine {
     }
 
     private boolean any(JsonNode rule) throws Exception {
-        JsonNode log = new ObjectMapper().createObjectNode();
-        ((ObjectNode) log).put("id", rule.get("id").asText());
         Object factVal  = factMap.get(rule.get("fact").asText());
         if(factVal == null) {
             return false;
         }
         boolean op = (boolean) eval(rule);
-        ((ObjectNode) log).put("op", op);
-        rulesOp.add(log);
+        logThis(rule, op);
         return op;
     }
 
     private boolean all(JsonNode rule) throws Exception {
-        JsonNode log = new ObjectMapper().createObjectNode();
-        ((ObjectNode) log).put("id", rule.get("id").asText());
         Object factVal = factMap.get(rule.get("fact").asText());
         if(factVal == null) {
             return true;
         }
         boolean op = (boolean) eval(rule);
-        ((ObjectNode) log).put("op", op);
-        rulesOp.add(log);
+        logThis(rule, op);
         return op;
+    }
+
+    private void logThis(JsonNode rule, boolean op) {
+        if(rule.get("id") != null) {
+            JsonNode log = new ObjectMapper().createObjectNode();
+            ((ObjectNode) log).put("id", rule.get("id").asText());
+            ((ObjectNode) log).put("op", op);
+            rulesOp.add(log);
+        }
     }
 
     private Object eval(JsonNode rule) throws Exception {
