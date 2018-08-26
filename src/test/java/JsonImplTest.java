@@ -13,7 +13,7 @@ import java.util.Map;
  * @author praveenkamath
  **/
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RulesTest {
+public class JsonImplTest {
 
     @Test
     public void testJsonImplRuleSuccess() throws Exception {

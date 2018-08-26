@@ -157,7 +157,6 @@ public class JaninoTest {
         Object subs[] = {"p", "r", "a", 10};
         try {
             boolean op = (boolean) JaninoExpressUtils.brew(key, expression, variables, params, subs);
-            System.out.println(op);
             assertTrue(op);
         } catch (Exception e) {
             e.printStackTrace();
