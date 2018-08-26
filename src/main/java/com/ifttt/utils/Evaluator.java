@@ -44,7 +44,7 @@ public class Evaluator {
             return exp.evaluate() == 1;
         }
         if(operator.getType() == OperationTypeEnum.EXPRESSION) {
-            return JaninoExpressUtils.brew(rule.get("id").asText(), rule.get("exp").asText(), rule.get("params").asText().split(","), (Object[]) actual);
+            return JaninoExpressUtils.brew(rule.get("id").asText(), rule.get("exp").asText(), rule.get("params").asText().split(","),  rule.get("paramTypes"), (Object[]) actual);
         }
         throw new Exception("Unsupported operator!");
     }
