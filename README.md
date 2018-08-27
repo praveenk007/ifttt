@@ -207,7 +207,7 @@ The rule will be something like below
         "exp" : "a/(b * b * 0.0001) >= 0 && a/(b * b * 0.0001) < 35"
 }
 ```
-Remember, here the ```id``` value has to be unique throughout the project, as the compiled expression is stored in memory using this value as the key
+Remember, here the ```id``` value has to be unique throughout the project, as the compiled expression is stored in memory using this value as the key.
 Here, you need to pass fact in below manner
 ```java
 map.put("bmi", new Integer(){60, 160});
