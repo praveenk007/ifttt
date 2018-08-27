@@ -3,6 +3,7 @@ package com.ifttt.abstracts;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
+ *
  * @author praveenkamath
  **/
 public abstract class RuleEngine {
