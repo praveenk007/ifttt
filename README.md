@@ -189,7 +189,33 @@ Ex.
    "value" : true
 }
 ```
+### V1.0.0.4
+Used [Janino](https://janino-compiler.github.io/janino/) to evaluate expressions. This JAVA utility offers a great feature where-in you can compile the expressions once (like ```a + b``` where ```a``` and ```b``` are variables), then pass dynamic parameters on runtime. This saves time (typical engines compiles the expression all the time which isn't required, thus, costing time)
 
+#### Usage
+The rule will be something like below
+```json
+{
+        "id" : "BMI", 
+        "operator" : "EXPRESSION", 
+        "fact" : "bmi", 
+        "params" : "a,b", 
+        "paramTypes" : {
+            "a" : "INTEGER", 
+            "b" : "INTEGER"
+        }, 
+        "exp" : "a/(b * b * 0.0001) >= 0 && a/(b * b * 0.0001) < 35"
+}
+```
+Remember, here the ```id``` value has to be unique throughout the project, as the compiled expression is stored in memory using this value as the key.
+Here, you need to pass fact in below manner
+```java
+map.put("bmi", new Integer(){60, 160});
+.
+.
+.
+```
 ### Upcoming features in pipeline
 Rule document will have a ``` then``` to execute ``` Math``` operations defined in it. ``` then``` field can be defined something like this ``` then : "($days+1)" ```, where ``` days``` is the fact provided in fact object. The result will be returned to the caller if the condition evaluates to true.
+
 
