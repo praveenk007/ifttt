@@ -43,7 +43,7 @@ Rules can be provided in below ``` JsonNode ``` format
 Rules defined under ``` any``` block are OR'd with one another and those defined under ``` all``` block are AND with one another.
 Result of these rules can be again OR'd or AND (as you can see a parent ``` any``` block in above rule example).
 
-Above rules are run against facts defined in below ``` JAVA``` format
+Above rules are run against facts defined either in below format
 
 ```java
 public class RuleModel {
@@ -62,6 +62,14 @@ public class RuleModel {
 
     //... getters/setters
 }
+```
+
+or
+
+```java
+Map<String, Object> facts = new HashMap<String, Object>();
+facts.put("beer_consumption", 10);
+facts.put("cigar_consumption", 10);
 ```
 
 ### Code snippet for usage
@@ -181,7 +189,33 @@ Ex.
    "value" : true
 }
 ```
+### V1.0.0.4
+Used [Janino](https://janino-compiler.github.io/janino/) to evaluate expressions. This JAVA utility offers a great feature where-in you can compile the expressions once (like ```a + b``` where ```a``` and ```b``` are variables), then pass dynamic parameters on runtime. This saves time (typical engines compiles the expression all the time which isn't required, thus, costing time)
 
+#### Usage
+The rule will be something like below
+```json
+{
+        "id" : "BMI", 
+        "operator" : "EXPRESSION", 
+        "fact" : "bmi", 
+        "params" : "a,b", 
+        "paramTypes" : {
+            "a" : "INTEGER", 
+            "b" : "INTEGER"
+        }, 
+        "exp" : "a/(b * b * 0.0001) >= 0 && a/(b * b * 0.0001) < 35"
+}
+```
+Remember, here the ```id``` value has to be unique throughout the project, as the compiled expression is stored in memory using this value as the key
+Here, you need to pass fact in below manner
+```java
+map.put("bmi", new Integer(){60, 160});
+.
+.
+.
+```
 ### Upcoming features in pipeline
 Rule document will have a ``` then``` to execute ``` Math``` operations defined in it. ``` then``` field can be defined something like this ``` then : "($days+1)" ```, where ``` days``` is the fact provided in fact object. The result will be returned to the caller if the condition evaluates to true.
+
 
