@@ -7,7 +7,7 @@
     <groupId>com.turtle</groupId>
     <packaging>jar</packaging>
     <artifactId>ifttt</artifactId>
-    <version>1.0.0.5</version>
+    <version>1.0.0.6</version>
     <name>ifttt</name>
     <url>http://maven.apache.org</url>
 
