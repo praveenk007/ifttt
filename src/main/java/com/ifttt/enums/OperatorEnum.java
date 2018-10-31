@@ -9,6 +9,8 @@ public enum OperatorEnum {
 
     EQUALS("==", OperationTypeEnum.MATH),
 
+    NOT_EQUALS("!=", OperationTypeEnum.MATH),
+
     GREATER_THAN(">", OperationTypeEnum.MATH),
 
     LESSER_THAN("<", OperationTypeEnum.MATH),
