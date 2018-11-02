@@ -1,6 +1,35 @@
 # ifttt - if this then that
 is a simple-to-use rule engine which can be used to keep the conditional business logics outside the codebase.
 
+### V1.0.0.6
+Added NOT_EQUALS operator for numeric values. It checks if value in fact is not equal to specified value in rule.
+
+### V1.0.0.4
+Used [Janino](https://janino-compiler.github.io/janino/) to evaluate expressions. This JAVA utility offers a great feature where-in you can compile the expressions once (like ```a + b``` where ```a``` and ```b``` are variables), then pass dynamic parameters on runtime. This saves time (typical engines compiles the expression all the time which isn't required, thus, costing time)
+
+#### Usage
+The rule will be something like below
+```json
+{
+        "id" : "BMI", 
+        "operator" : "EXPRESSION", 
+        "fact" : "bmi", 
+        "params" : "a,b", 
+        "paramTypes" : {
+            "a" : "INTEGER", 
+            "b" : "INTEGER"
+        }, 
+        "exp" : "a/(b * b * 0.0001) >= 0 && a/(b * b * 0.0001) < 35"
+}
+```
+Remember, here the ```id``` value has to be unique throughout the project, as the compiled expression is stored in memory using this value as the key.
+Here, you need to pass fact in below manner
+```java
+map.put("bmi", new Integer(){60, 160});
+.
+.
+.
+```
 
 ## Usage
 
@@ -88,7 +117,27 @@ This rule engine also supports nested (multiple levels of) ```any```/```all``` b
 
 ### Operators supported
 
-#### 1. LESSER_THAN
+#### 1. EQUALS
+Checks if provided fact is equal to the rule value.
+Ex.
+```json
+{
+   "fact" : "age", 
+   "operator" : "EQUALS", 
+   "value" : 22
+}
+```
+#### 2. NOT_EQUALS
+Checks if provided fact is equal to the rule value.
+Ex.
+```json
+{
+   "fact" : "age", 
+   "operator" : "EQUALS", 
+   "value" : 22
+}
+```
+#### 3. LESSER_THAN
 Checks if provided fact is lesser than the rule value.
 Ex.
 ```json
@@ -98,7 +147,7 @@ Ex.
    "value" : 22
 }
 ```
-#### 2. LESSER_THAN_INCLUSIVE
+#### 4. LESSER_THAN_INCLUSIVE
 Checks if provided fact is lesser than or equals the rule value.
 Ex.
 ```json
@@ -108,7 +157,7 @@ Ex.
    "value" : 22
 }
 ```
-#### 3. GREATER_THAN
+#### 5. GREATER_THAN
 Checks if provided fact is greater than the rule value.
 Ex.
 ```json
@@ -118,7 +167,7 @@ Ex.
    "value" : 22
 }
 ```
-#### 4. GREATER_THAN_INCLUSIVE
+#### 6. GREATER_THAN_INCLUSIVE
 Checks if provided fact is greater than or equals the rule value.
 Ex.
 ```json
@@ -129,7 +178,7 @@ Ex.
 }
 ```
 
-#### 5. STRING_EQUALS
+#### 7. STRING_EQUALS
 Checks if 2 strings are equal or not.
 Ex.
 ```json
@@ -139,7 +188,7 @@ Ex.
    "value" : "Abc"
 }
 ```
-#### 6. STRING_NOT_EQUALS
+#### 8. STRING_NOT_EQUALS
 Checks if 2 strings are not equal.
 Ex.
 ```json
@@ -149,7 +198,7 @@ Ex.
    "value" : "Abc"
 }
 ```
-#### 7. STRING_EQUALS_IGNORE
+#### 9. STRING_EQUALS_IGNORE
 Checks if 2 strings are equal or not, irrespactive of their cases.
 Ex.
 ```json
@@ -159,7 +208,7 @@ Ex.
    "value" : "ABC"
 }
 ```
-#### 8. LIST_CONTAINS
+#### 10. LIST_CONTAINS
 Checks if provided fact is present in the rule values.
 Ex.
 ```json
@@ -169,7 +218,7 @@ Ex.
    "value" : ["abc", "xyz"]
 }
 ```
-#### 9. LIST_NOT_CONTAINS
+#### 11. LIST_NOT_CONTAINS
 Checks if provided fact is NOT present in the rule values.
 Ex.
 ```json
@@ -179,7 +228,7 @@ Ex.
    "value" : ["abc", "xyz"]
 }
 ```
-#### 10. BOOLEAN_EQUALS
+#### 12. BOOLEAN_EQUALS
 Checks if provided boolean fact is equal to the rule value.
 Ex.
 ```json
@@ -189,32 +238,7 @@ Ex.
    "value" : true
 }
 ```
-### V1.0.0.4
-Used [Janino](https://janino-compiler.github.io/janino/) to evaluate expressions. This JAVA utility offers a great feature where-in you can compile the expressions once (like ```a + b``` where ```a``` and ```b``` are variables), then pass dynamic parameters on runtime. This saves time (typical engines compiles the expression all the time which isn't required, thus, costing time)
 
-#### Usage
-The rule will be something like below
-```json
-{
-        "id" : "BMI", 
-        "operator" : "EXPRESSION", 
-        "fact" : "bmi", 
-        "params" : "a,b", 
-        "paramTypes" : {
-            "a" : "INTEGER", 
-            "b" : "INTEGER"
-        }, 
-        "exp" : "a/(b * b * 0.0001) >= 0 && a/(b * b * 0.0001) < 35"
-}
-```
-Remember, here the ```id``` value has to be unique throughout the project, as the compiled expression is stored in memory using this value as the key.
-Here, you need to pass fact in below manner
-```java
-map.put("bmi", new Integer(){60, 160});
-.
-.
-.
-```
 ### Upcoming features in pipeline
 Rule document will have a ``` then``` to execute ``` Math``` operations defined in it. ``` then``` field can be defined something like this ``` then : "($days+1)" ```, where ``` days``` is the fact provided in fact object. The result will be returned to the caller if the condition evaluates to true.
 
