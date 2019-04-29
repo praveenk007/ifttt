@@ -29,6 +29,8 @@ public enum OperatorEnum {
 
     LIST_CONTAINS("listContains", OperationTypeEnum.LIST_CONTAINS),
 
+    INPUT_LIST_HAS("inputListHas", OperationTypeEnum.INPUT_LIST_HAS),
+
     LIST_NOT_CONTAINS("listNotContains", OperationTypeEnum.LIST_NOT_CONTAINS);
 
     private String exp;

@@ -1,15 +1,13 @@
 package com.ifttt.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.ifttt.enums.OperationTypeEnum;
 import com.ifttt.enums.OperatorEnum;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author praveenkamath
@@ -23,6 +21,16 @@ public class Evaluator {
         }
         if(operator.getType() == OperationTypeEnum.BOOLEAN) {
             return (boolean)actual == ((BooleanNode)expected).asBoolean();
+        }
+        if(operator.getType() == OperationTypeEnum.INPUT_LIST_HAS) {
+            if(actual instanceof List) {
+                return ((List) actual).contains(((JsonNode) expected).asText());
+            }
+            for(JsonNode jsonNode: (JsonNode) expected) {
+                if(jsonNode.asText().equalsIgnoreCase(actual.toString())) {
+                    return true;
+                }
+            } return false;
         }
         if(operator.getType() == OperationTypeEnum.LIST_CONTAINS) {
             for(JsonNode jsonNode: (JsonNode) expected) {
