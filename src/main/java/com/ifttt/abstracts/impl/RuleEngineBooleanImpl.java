@@ -89,7 +89,7 @@ public class RuleEngineBooleanImpl extends RuleEngine {
 
     private boolean all(JsonNode rule) throws Exception {
         Object factVal = factMap.get(rule.get("fact").asText());
-        return factVal == null || (boolean) eval(rule);
+        return factVal != null && (boolean) eval(rule);
     }
 
     private Object eval(JsonNode rule) throws Exception {

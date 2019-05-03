@@ -56,5 +56,18 @@ public class ListFactsTest {
         Assert.assertFalse(op);
     }
 
+    @Test
+    public void nullList() throws Exception {
+        final String rule = "{\"all\":[{\"fact\":\"partnerCerts\",\"operator\":\"INPUT_LIST_HAS\",\"value\":\"pospgi\"},{\"fact\":\"productCerts\",\"operator\":\"INPUT_LIST_HAS\",\"value\":\"pospgi\"}]}";
+        Map<String, Object> facts = new HashMap<>();
+        List<String> partnerCerts = new ArrayList();
+        partnerCerts.add("pospgi");
+        partnerCerts.add("spgli");
+        facts.put("partnerCerts", partnerCerts);
+        facts.put("productCerts", null);
+
+        boolean op = new RuleEngineBooleanImpl().runThis(new ObjectMapper().readValue(rule, JsonNode.class)).against(facts).execute();
+        Assert.assertFalse(op);
+    }
 
 }
