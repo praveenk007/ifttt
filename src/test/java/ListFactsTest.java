@@ -60,7 +60,7 @@ public class ListFactsTest {
     public void nullList() throws Exception {
         final String rule = "{\"all\":[{\"fact\":\"partnerCerts\",\"operator\":\"INPUT_LIST_HAS\",\"value\":\"pospgi\"},{\"fact\":\"productCerts\",\"operator\":\"INPUT_LIST_HAS\",\"value\":\"pospgi\"}]}";
         Map<String, Object> facts = new HashMap<>();
-        List<String> partnerCerts = new ArrayList();
+        List<String> partnerCerts = new ArrayList<>();
         partnerCerts.add("pospgi");
         partnerCerts.add("spgli");
         facts.put("partnerCerts", partnerCerts);
@@ -68,6 +68,46 @@ public class ListFactsTest {
 
         boolean op = new RuleEngineBooleanImpl().runThis(new ObjectMapper().readValue(rule, JsonNode.class)).against(facts).execute();
         Assert.assertFalse(op);
+    }
+
+    @Test
+    public void listIntersect() throws Exception {
+        final String rule = "{\"all\":[{\"fact\":\"partnerCerts\",\"operator\":\"LIST_INTERSECTS\",\"value\": [\"pospgi\", \"pospli\"]}]}";
+
+        Map<String, Object> facts = new HashMap<>();
+        List<String> partnerCerts = new ArrayList<>();
+        partnerCerts.add("pospgi");
+        facts.put("partnerCerts", partnerCerts);
+
+        boolean op = new RuleEngineBooleanImpl().runThis(new ObjectMapper().readValue(rule, JsonNode.class)).against(facts).execute();
+        Assert.assertTrue(op);
+    }
+
+    @Test
+    public void listIntersect_oneElementContainsOne() throws Exception {
+        final String rule = "{\"all\":[{\"fact\":\"partnerCerts\",\"operator\":\"LIST_INTERSECTS\",\"value\": [\"pospgi\", \"pospli\"]}]}";
+
+        Map<String, Object> facts = new HashMap<>();
+        List<String> partnerCerts = new ArrayList<>();
+        partnerCerts.add("pospgi");
+        facts.put("partnerCerts", partnerCerts);
+
+        final boolean op = new RuleEngineBooleanImpl().runThis(new ObjectMapper().readValue(rule, JsonNode.class)).against(facts).execute();
+        Assert.assertTrue(op);
+    }
+
+    @Test
+    public void listIntersect_twoElementContainsOne() throws Exception {
+        final String rule = "{\"all\":[{\"fact\":\"partnerCerts\",\"operator\":\"LIST_INTERSECTS\",\"value\": [\"pospgi\", \"pospli\"]}]}";
+
+        Map<String, Object> facts = new HashMap<>();
+        List<String> partnerCerts = new ArrayList<>();
+        partnerCerts.add("pospgi");
+        partnerCerts.add("abc");
+        facts.put("partnerCerts", partnerCerts);
+
+        final boolean op = new RuleEngineBooleanImpl().runThis(new ObjectMapper().readValue(rule, JsonNode.class)).against(facts).execute();
+        Assert.assertTrue(op);
     }
 
 }

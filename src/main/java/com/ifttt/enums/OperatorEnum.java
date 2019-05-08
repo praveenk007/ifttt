@@ -31,6 +31,8 @@ public enum OperatorEnum {
 
     INPUT_LIST_HAS("inputListHas", OperationTypeEnum.INPUT_LIST_HAS),
 
+    LIST_INTERSECTS("listIntersects", OperationTypeEnum.LIST_INTERSECTS),
+
     LIST_NOT_CONTAINS("listNotContains", OperationTypeEnum.LIST_NOT_CONTAINS);
 
     private String exp;
