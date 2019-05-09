@@ -1,5 +1,5 @@
 # ifttt - if this then that
-is a simple-to-use rule engine which can be used to keep the conditional business logics outside the codebase.
+is a simple-to-use rule engine which can be used to keep conditional business logics outside the codebase.
 
 ### V1.0.0.8
 Added LIST_INTERSECTS to check if a given list in facts has any elements from the specified list in rules.
