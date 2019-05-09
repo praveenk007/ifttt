@@ -1,6 +1,12 @@
 # ifttt - if this then that
 is a simple-to-use rule engine which can be used to keep the conditional business logics outside the codebase.
 
+### 1.0.0.8
+Added LIST_INTERSECTS to check if a given list in facts has any elements from the specified list in rules.
+
+### 1.0.0.7
+Added LIST_HAS operator to check if a given list has a particular string value or not.
+
 ### V1.0.0.6
 Added NOT_EQUALS operator for numeric values. It checks if value in fact is not equal to specified value in rule.
 
