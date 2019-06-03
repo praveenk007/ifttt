@@ -9,6 +9,8 @@ public enum OperatorEnum {
 
     EQUALS("==", OperationTypeEnum.MATH),
 
+    NOT_EQUALS("!=", OperationTypeEnum.MATH),
+
     GREATER_THAN(">", OperationTypeEnum.MATH),
 
     LESSER_THAN("<", OperationTypeEnum.MATH),
@@ -26,6 +28,10 @@ public enum OperatorEnum {
     LESSER_THAN_INCLUSIVE("<=", OperationTypeEnum.MATH),
 
     LIST_CONTAINS("listContains", OperationTypeEnum.LIST_CONTAINS),
+
+    INPUT_LIST_HAS("inputListHas", OperationTypeEnum.INPUT_LIST_HAS),
+
+    LIST_INTERSECTS("listIntersects", OperationTypeEnum.LIST_INTERSECTS),
 
     LIST_NOT_CONTAINS("listNotContains", OperationTypeEnum.LIST_NOT_CONTAINS);
 
